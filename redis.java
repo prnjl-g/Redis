@@ -6,6 +6,8 @@ public class Redis {
     private static Map<String,Long> expires = Collections.synchronizedMap(new HashMap<String, Long>());
     private static Map<String,SortedMap<Long,SortedSet<String>>> sortedElements = Collections.synchronizedMap(new HashMap<String,SortedMap<Long,SortedSet<String>>>());
     private static Map<String,Map<String,Long>> refElements = Collections.synchronizedMap(new HashMap<String,Map<String,Long>>());
+    
+    // function for get method
     public static synchronized String GET(String key){
         if(expires.containsKey(key)){
             if(expires.get(key) <= System.currentTimeMillis()){
@@ -19,6 +21,8 @@ public class Redis {
         }
         else return null;
     }
+    
+    // function to implement SET
     public static synchronized String SET(String key, String value){
         if(expires.containsKey(key)){
             if(expires.get(key) <= System.currentTimeMillis()){
@@ -31,6 +35,8 @@ public class Redis {
         if(expires.containsKey(key)) expires.remove(key);
         return "OK";
     }
+    
+    // function to implement expire
     public static synchronized int Expire(String key, int time){
         if(time <= 0 && expires.containsKey(key)){
             expires.remove(key);
@@ -41,6 +47,8 @@ public class Redis {
         }
         return 1;
     }
+    
+    // function to implement ZADD
     public static synchronized int ZADD(String data){
         String[] key_value = data.split(" ");
         if(refElements.containsKey(key_value[0])){
@@ -83,6 +91,8 @@ public class Redis {
         }
         return 1;
     }
+    
+    // function to implement ZRANK
     public static synchronized Integer ZRANK(String key, String value){
         if(refElements.containsKey(key)){
             if(refElements.get(key).containsKey(value)){
@@ -104,6 +114,8 @@ public class Redis {
         }
         return null;
     }
+    
+    //function to implement ZRANGE
     public static synchronized List<String> ZRANGE(String key, int start, int stop){
         List<String> element = Collections.synchronizedList(new ArrayList<String>());
         if(start < 0) {
