@@ -1,0 +1,25 @@
+   				                                                       BrowserStack Assignment Report
+
+
+1. Why did you choose that language ?
+Ans: I chose Java because I prefer Java over other languages for multithreading purposes, it is simple and efficient and also I am certified in J2EE, so I feel comfortable in Java for such purposes.
+
+2. What are the further improvements that can be made to make it
+efficient ?
+Ans: The complexity of the functions is in a range from O(1) to O(n).
+But I feel that the complexity of the function ZRANK can be improved to O(log(n)) which is O(n), the complexity of this function can be improved further if I implement red-black tree which is thread-safe and storing indexes along with it so that it will make indexing retrieval in O(log(n)) same as policy-based data structures in C++.
+
+3. What data structures have you used and why ?
+Ans: I have used the following data structures:
+	-> synchronized_map because it is thread-safe and its complexity is O(1).
+	
+	-> sorted_set because it is synchronized and thread-safe and also the time time complexity is O(log(n)) for sorting.
+
+	-> sorted_map because it is thread-safe and i need to store key and value pair of scores and elements in a sorted manner with a minimum time complexity of O(n).
+
+	-> Atomic integer because it is thread-safe and it is used to store the size of sorted set.
+
+4. Does your implementation support multi threaded operations? If No why can’t it be? If yes then how ?
+Ans: Yes, my implementation support multi threaded operations.
+     All the data structures are thread safe and ZADD(), ZRANK(), ZRANGE() functions are in a synchronized multi threaded arrangement with the functions GET() and SET().
+     But if we use GET() function the SET() function will be locked vice-versa for the SET() function, also if we use ZADD() function the other two functions ZRANK() and ZRANGE will be locked similar actions are applicale for functions ZRANK() and ZRANGE(). 
